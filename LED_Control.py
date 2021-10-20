@@ -1,6 +1,6 @@
 import cgi
 import RPi.GPIO as GPIO
-
+import json
 import cgitb
 cgitb.enable()
 
@@ -16,23 +16,20 @@ GPIO.setup(ledPin3, GPIO.OUT)
 
 data = cgi.FieldStorage()
 s1 = data.getvalue('slider1')
-
-if ('LED Green' in data): 
-  GPIO.output(ledPin1, 1)
-elif ( 'LED Blue' in data):
-  GPIO.output(ledPin2, 1)
-elif ( 'LED White' in data):
-  GPIO.output(ledPin3, 1)
-
-with open('led-pwm.txt', 'w') as f:  
-  f.write(str(s1))
+b = data.getvalue('option')
 
 
+info = {"slider1":s1, "option":b}
+with open('led-pwm.txt', 'w') as f:
+  json.dump(data,f)    
+    
+ 
+   
 print('Content-type: text/html\n\n')
 print('<html>')
 print('<head>')
 print('<title>LED Control</title>')
-
+print('</head>')
 print('<form action="/cgi-bin/LED_Control.py" method="POST">')
 print('<input type="range" name="slider1" min="0" max="100" value="%s"><br>' % s1)
 print('<input type="submit" value="Change LED brightness">')
