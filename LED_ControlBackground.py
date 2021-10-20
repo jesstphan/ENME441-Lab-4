@@ -6,7 +6,9 @@
 import RPi.GPIO as GPIO
 import time
 
-ledPin = 19
+ledPin = 19 #Green
+ledPin = 20 #Blue 
+ledPin = 21 #White 
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(ledPin, GPIO.OUT)
