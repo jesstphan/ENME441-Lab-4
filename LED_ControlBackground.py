@@ -16,9 +16,6 @@ GPIO.setup(ledPin1, GPIO.OUT)
 GPIO.setup(ledPin2, GPIO.OUT)
 GPIO.setup(ledPin3, GPIO.OUT)
 
-with open('led-pwm.txt', 'r') as f:
-data = json.load(f)
-
 pwm1 = GPIO.PWM(ledPin1, 100) # PWM object on our pin at 100 Hz
 pwm2 = GPIO.PWM(ledPin2, 100)
 pwm3 = GPIO.PWM(ledPin3, 100)
@@ -28,7 +25,20 @@ pwm3.start(0)
 
 while True:
   with open("led-pwm.txt", 'r') as f:
-    if data['LED Green']
-    dutyCycle = float(f.read()) # read duty cycle value from file
-  pwm.ChangeDutyCycle(dutyCycle)
+    data = json.load(f)
+    dutyCycle = float(f.read())
+    
+    if data['option'] == g
+      pwm1.ChangeDutyCycle(dutyCycle)
+      pwm2.start(0)
+      pwm3.start(0)
+    if data['option'] == b
+      pwm2.ChangeDutyCycle(dutyCycle)
+      pwm1.start(0)
+      pwm3.start(0)
+    if data['option'] == w
+      pwm3.ChangeDutyCycle(dutyCycle)
+      pwm1.start(0)
+      pwm2.start(0)
+    
   time.sleep(0.1)
