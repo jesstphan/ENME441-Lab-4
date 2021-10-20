@@ -28,6 +28,7 @@ pwm3.start(0)
 
 while True:
   with open("led-pwm.txt", 'r') as f:
+    if data['LED Green']
     dutyCycle = float(f.read()) # read duty cycle value from file
   pwm.ChangeDutyCycle(dutyCycle)
   time.sleep(0.1)
